@@ -8,29 +8,81 @@
 </head>
 <body>
     <main>
-        <article data-testid="test-todo-card" class="todo-card">
-            <header>
-                <h2 data-testid="test-todo-title" class="todo-title">Complete the Frontend Task</h2>
-                <span data-testid="test-todo-priority" class="priority-badge" aria-label="Priority: Medium">Medium</span>
+        <article data-testid="test-todo-card" class="todo-card" aria-label="Todo item card">
+            <header class="card-header">
+                <div class="title-group">
+                    <h2 data-testid="test-todo-title" class="todo-title">Complete the Frontend Task</h2>
+                    <div class="priority-group">
+                        <span data-testid="test-todo-priority-indicator" class="priority-indicator priority-medium" aria-label="Medium priority"></span>
+                        <span data-testid="test-todo-priority" class="priority-text">Medium</span>
+                    </div>
+                </div>
+                <div class="status-group">
+                    <label for="status-control" class="status-label">Status</label>
+                    <select id="status-control" data-testid="test-todo-status-control" class="status-control" aria-label="Todo status">
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Done">Done</option>
+                    </select>
+                    <span data-testid="test-todo-status" class="status-indicator">Pending</span>
+                </div>
             </header>
-            <p data-testid="test-todo-description" class="todo-description">Build a testable todo item card component with all required elements and accessibility features.</p>
+
+            <section id="todo-collapsible" data-testid="test-todo-collapsible-section" class="collapsible-section collapsed" aria-labelledby="description-label">
+                <p class="sr-only" id="description-label">Task description section</p>
+                <p data-testid="test-todo-description" class="todo-description">Build a testable todo item card component with all required elements and accessibility features. It should support editing, priority changes, expand/collapse interactions, and accessible controls.</p>
+            </section>
+
+            <button type="button" data-testid="test-todo-expand-toggle" class="expand-toggle" aria-expanded="false" aria-controls="todo-collapsible">Show more</button>
+
             <div class="todo-meta">
-                <time data-testid="test-todo-due-date" class="due-date" datetime="2026-04-20T12:00:00Z">Due Apr 20, 2026</time>
+                <div class="due-row">
+                    <time data-testid="test-todo-due-date" class="due-date" datetime="2026-04-20T12:00:00Z">Due Apr 20, 2026</time>
+                    <span data-testid="test-todo-overdue-indicator" class="overdue-indicator hidden">Overdue</span>
+                </div>
                 <span data-testid="test-todo-time-remaining" class="time-remaining" aria-live="polite">Due in 5 days</span>
-                <span data-testid="test-todo-status" class="status-indicator">Pending</span>
             </div>
+
             <div class="todo-actions">
                 <label for="complete-toggle" class="checkbox-label">
                     <input type="checkbox" id="complete-toggle" data-testid="test-todo-complete-toggle">
-                    Mark as Complete
+                    <span>Mark as complete</span>
                 </label>
-                <button data-testid="test-todo-edit-button" class="edit-button" aria-label="Edit todo">Edit</button>
-                <button data-testid="test-todo-delete-button" class="delete-button" aria-label="Delete todo">Delete</button>
+                <button type="button" data-testid="test-todo-edit-button" class="edit-button">Edit</button>
+                <button type="button" data-testid="test-todo-delete-button" class="delete-button">Delete</button>
             </div>
+
             <ul data-testid="test-todo-tags" class="tags-list" role="list">
                 <li data-testid="test-todo-tag-work" class="tag">Work</li>
-                <li data-testid="test-todo-tag-urgent" class="tag">Urgent</li>
+                <li data-testid="test-todo-tag-urgent" class="tag urgent">Urgent</li>
             </ul>
+
+            <form data-testid="test-todo-edit-form" class="edit-form hidden" aria-label="Edit todo form">
+                <div class="form-row">
+                    <label for="edit-title-input">Title</label>
+                    <input id="edit-title-input" data-testid="test-todo-edit-title-input" class="text-input" type="text" />
+                </div>
+                <div class="form-row">
+                    <label for="edit-description-input">Description</label>
+                    <textarea id="edit-description-input" data-testid="test-todo-edit-description-input" rows="4"></textarea>
+                </div>
+                <div class="form-row form-grid">
+                    <label for="edit-priority-select">Priority</label>
+                    <select id="edit-priority-select" data-testid="test-todo-edit-priority-select">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+                <div class="form-row form-grid">
+                    <label for="edit-due-date-input">Due date</label>
+                    <input id="edit-due-date-input" data-testid="test-todo-edit-due-date-input" class="text-input" type="datetime-local" />
+                </div>
+                <div class="form-actions">
+                    <button type="button" data-testid="test-todo-save-button" class="save-button">Save</button>
+                    <button type="button" data-testid="test-todo-cancel-button" class="cancel-button">Cancel</button>
+                </div>
+            </form>
         </article>
     </main>
     <script src="script.js"></script>
