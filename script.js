@@ -199,6 +199,14 @@ function handleDeleteButton() {
     alert('Delete clicked');
 }
 
+function updateCurrentTime() {
+    const timeElement = document.querySelector('[data-testid="test-user-time"]');
+    if (!timeElement) {
+        return;
+    }
+    timeElement.textContent = `Current time: ${Date.now()} ms`;
+}
+
 function initializeElements() {
     elements.todoCard = document.querySelector('[data-testid="test-todo-card"]');
     elements.todoTitle = document.querySelector('[data-testid="test-todo-title"]');
@@ -251,5 +259,7 @@ window.addEventListener('DOMContentLoaded', () => {
     initializeFormDefaults();
     setupEventListeners();
     updateUI();
+    updateCurrentTime();
+    setInterval(updateCurrentTime, 1000);
     startTimer();
 });
